@@ -21,10 +21,20 @@ public class ScoreCard {
     
     private Frame[] separeNumbers(String scoreCard) {
         Frame[] frame = new Frame[10];
-        int j = 0;
-        for (int i = 0; i < scoreCard.length(); i += 2) {
-            frame[j] = new Frame(Character.getNumericValue(scoreCard.charAt(i)), Character.getNumericValue(scoreCard.charAt(i+1)));
-            j++;
+        int pinCount = 0;
+        for (int i = 0; i < frame.length; i++) {
+            if (Character.isDigit(scoreCard.charAt(pinCount)) && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
+                int pin1 = Character.getNumericValue(scoreCard.charAt(pinCount));
+                int pin2 = Character.getNumericValue(scoreCard.charAt(pinCount + 1));
+                frame[i] = new Frame(pin1, pin2);
+                pinCount += 2;
+            }
+            if (!Character.isDigit(scoreCard.charAt(pinCount)) || !Character.isDigit(scoreCard.charAt(pinCount + 1))) {
+                if (!Character.isDigit(scoreCard.charAt(pinCount)) && scoreCard.charAt(pinCount) == 'X'){
+                    
+                }
+
+            }
         }
         return frame;
     }

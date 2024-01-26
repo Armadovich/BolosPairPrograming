@@ -22,9 +22,14 @@ public class ScoreCardTest {
 
     @Test
     public void TotalScoreHittingPinsTest() {
-
         String score = "12345123451234512345";
         int totalScore = scoreCard.calculateScore(score);
         assertEquals(60, totalScore);
+    }
+    
+    public void PrefectGameTest() {
+        String score = "XXXXXXXXXXXX";
+        int totalScore = scoreCard.calculateScore(score);
+        assertEquals(300, totalScore);
     }
 }
