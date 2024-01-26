@@ -14,11 +14,18 @@ public class ScoreCard {
         this.scoreCard = scoreCard;
     }
 
-    public List<Frame> getFrames() {
-        return frames;
+    public int calculateScore(String scoreCard) {
+        Frame[] frame = separeNumbers(scoreCard);
+        return frame[0].getScore();
     }
-
-    public void calculateScore(String scoreCard){
-        System.out.println(scoreCard);
+    
+    private Frame[] separeNumbers(String scoreCard) {
+        Frame[] frame = new Frame[10];
+        int j = 0;
+        for (int i = 0; i < scoreCard.length(); i += 2) {
+            frame[j] = new Frame(Character.getNumericValue(scoreCard.charAt(i)), Character.getNumericValue(scoreCard.charAt(i+1)));
+            j++;
+        }
+        return frame;
     }
 }
