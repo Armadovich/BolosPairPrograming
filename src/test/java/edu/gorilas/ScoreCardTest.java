@@ -38,4 +38,11 @@ public class ScoreCardTest {
         int totalScore = scoreCard.calculateScore(score);
         assertEquals(90, totalScore);
     }
+
+    @Test
+    public void SpareTest() {
+        String score = "5/5/5/5/5/5/5/5/5/5/5";
+        int totalScore = scoreCard.calculateScore(score);
+        assertEquals(150, totalScore);
+    }
 }

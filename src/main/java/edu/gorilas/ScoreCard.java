@@ -38,7 +38,7 @@ public class ScoreCard {
                 isStrike = true;
                 pinCount++;
             } else if (Character.isDigit(scoreCard.charAt(pinCount)) && scoreCard.charAt(pinCount + 1) == '/') {
-                char pin1 = scoreCard.charAt(pinCount - 1);
+                char pin1 = scoreCard.charAt(pinCount);
                 char pin2 = '/';
                 frame[i] = new Frame(pin1, pin2);
                 isSpare = true;
