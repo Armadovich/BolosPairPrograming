@@ -1,6 +1,5 @@
 package edu.gorilas;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +26,7 @@ public class ScoreCardTest {
         assertEquals(60, totalScore);
     }
     
+    @Test
     public void PrefectGameTest() {
         String score = "XXXXXXXXXXXX";
         int totalScore = scoreCard.calculateScore(score);

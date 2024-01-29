@@ -3,7 +3,8 @@ package edu.gorilas;
 public class Frame {
     private char pin1;
     private char pin2;
-    static int score = 0;
+    private char pinExtra;
+    private int score = 0;
     
     public Frame() {
     }
@@ -14,12 +15,19 @@ public class Frame {
         this.score += charToInt(pin1, 0) + charToInt(pin2, charToInt(pin1, 0));
     }
 
+    public Frame(char pin1, char pin2, char pinExtra) {
+        this.pin1 = CheckZero(pin1);
+        this.pin2 = CheckZero(pin2);
+        this.pin2 = CheckZero(pinExtra);
+        this.score += charToInt(pin1, 0) + charToInt(pin2, charToInt(pin1, 0) + charToInt(pinExtra, 0) );
+    }
+
     public int getScore() {
         return score;
     }
     
-    public static void setScore(int score) {
-        Frame.score = score;
+    public void setScore(int score) {
+        this.score += score;
     }
 
     private int charToInt(char pin, int pin2) {
