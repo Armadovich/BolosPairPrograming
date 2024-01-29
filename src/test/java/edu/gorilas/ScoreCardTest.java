@@ -32,4 +32,10 @@ public class ScoreCardTest {
         int totalScore = scoreCard.calculateScore(score);
         assertEquals(300, totalScore);
     }
+    @Test
+    public void HeartbreakTest() {
+        String score = "9-9-9-9-9-9-9-9-9-9-";
+        int totalScore = scoreCard.calculateScore(score);
+        assertEquals(90, totalScore);
+    }
 }

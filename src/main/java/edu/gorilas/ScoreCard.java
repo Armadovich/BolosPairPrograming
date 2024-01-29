@@ -24,9 +24,9 @@ public class ScoreCard {
         int pinCount = 0;
         boolean isStrike = false;
         boolean isSpare = false;
-    
+
         for (int i = 0; i < frame.length; i++) {
-            if (Character.isDigit(scoreCard.charAt(pinCount)) && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
+            if ((Character.isDigit(scoreCard.charAt(pinCount)) || scoreCard.charAt(pinCount) == '-') && (Character.isDigit(scoreCard.charAt(pinCount + 1)) || scoreCard.charAt(pinCount + 1) == '-')) {
                 char pin1 = scoreCard.charAt(pinCount);
                 char pin2 = scoreCard.charAt(pinCount + 1);
                 frame[i] = new Frame(pin1, pin2);
@@ -44,51 +44,41 @@ public class ScoreCard {
                 isSpare = true;
                 pinCount += 2;
             }
-            if (isStrike) {
-                if (scoreCard.charAt(pinCount) == 'X')
-                    frame[i].setScore(10);
-                if (scoreCard.charAt(pinCount + 1) == 'X')
-                    frame[i].setScore(10);
-                if (Character.isDigit(scoreCard.charAt(pinCount))
-                        && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
-                    frame[i].setScore(Character.getNumericValue(scoreCard.charAt(pinCount))
-                            + Character.getNumericValue(scoreCard.charAt(pinCount + 1)));
-                } else if (scoreCard.charAt(pinCount + 1) == '/') {
-                    frame[i].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
-                    frame[i].setScore(10 - Character.getNumericValue(scoreCard.charAt(pinCount)));
-                }
-                isStrike = false;
-            } else if (isSpare) {
-                if (scoreCard.charAt(pinCount) == 'X')
-                    frame[i].setScore(10);
-                if (Character.isDigit(scoreCard.charAt(pinCount))) {
-                    frame[i].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
-                }
-                isSpare = false;
-            }
-        }
-        if (isStrike) {
-            if (scoreCard.charAt(pinCount) == 'X')
-                frame[9].setScore(10);
-            if (scoreCard.charAt(pinCount + 1) == 'X')
-                frame[9].setScore(10);
-            if (Character.isDigit(scoreCard.charAt(pinCount))
-                    && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
-                frame[9].setScore(Character.getNumericValue(scoreCard.charAt(pinCount))
-                        + Character.getNumericValue(scoreCard.charAt(pinCount + 1)));
-            } else if (scoreCard.charAt(pinCount + 1) == '/') {
-                frame[9].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
-                frame[9].setScore(10 - Character.getNumericValue(scoreCard.charAt(pinCount)));
-            }
+            if (isStrike) 
+                frame[i].setScore(Strike(pinCount, scoreCard));
+            else if (isSpare) 
+                frame[i].setScore(Spare(pinCount, scoreCard));
             isStrike = false;
-        } else if (isSpare) {
-            if (scoreCard.charAt(pinCount) == 'X')
-                frame[0].setScore(10);
-            if (Character.isDigit(scoreCard.charAt(pinCount))) {
-                frame[0].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
-            }
             isSpare = false;
         }
+        if (isStrike)
+            frame[9].setScore(Strike(pinCount, scoreCard));
+        else if (isSpare) 
+            frame[9].setScore(Spare(pinCount, scoreCard));
         return frame;
+    }
+    
+    private int Strike(int pinCount, String scoreCard) {
+        if (scoreCard.charAt(pinCount) == 'X'
+                && (scoreCard.charAt(pinCount + 1) == 'X' || scoreCard.charAt(pinCount + 1) == '/'))
+            return 20;
+        if (scoreCard.charAt(pinCount) == 'X' && Character.isDigit(scoreCard.charAt(pinCount + 1)))
+            return 10 + Character.getNumericValue(scoreCard.charAt(pinCount + 1));
+        if (Character.isDigit(scoreCard.charAt(pinCount)) && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
+            return Character.getNumericValue(scoreCard.charAt(pinCount))
+                    + Character.getNumericValue(scoreCard.charAt(pinCount + 1));
+        } else if (scoreCard.charAt(pinCount + 1) == '/') {
+            return 10;
+        }
+        return 0;
+    }
+    
+    private int Spare(int pinCount, String scoreCard) {
+        if (scoreCard.charAt(pinCount) == 'X')
+            return 10;
+        if (Character.isDigit(scoreCard.charAt(pinCount))) {
+            return Character.getNumericValue(scoreCard.charAt(pinCount));
+        }
+        return 0;
     }
 }
