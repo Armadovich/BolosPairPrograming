@@ -69,16 +69,16 @@ public class ScoreCard {
         }
         if (isStrike) {
             if (scoreCard.charAt(pinCount) == 'X')
-                frame[0].setScore(10);
+                frame[9].setScore(10);
             if (scoreCard.charAt(pinCount + 1) == 'X')
-                frame[0].setScore(10);
+                frame[9].setScore(10);
             if (Character.isDigit(scoreCard.charAt(pinCount))
                     && Character.isDigit(scoreCard.charAt(pinCount + 1))) {
-                frame[0].setScore(Character.getNumericValue(scoreCard.charAt(pinCount))
+                frame[9].setScore(Character.getNumericValue(scoreCard.charAt(pinCount))
                         + Character.getNumericValue(scoreCard.charAt(pinCount + 1)));
             } else if (scoreCard.charAt(pinCount + 1) == '/') {
-                frame[0].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
-                frame[0].setScore(10 - Character.getNumericValue(scoreCard.charAt(pinCount)));
+                frame[9].setScore(Character.getNumericValue(scoreCard.charAt(pinCount)));
+                frame[9].setScore(10 - Character.getNumericValue(scoreCard.charAt(pinCount)));
             }
             isStrike = false;
         } else if (isSpare) {
