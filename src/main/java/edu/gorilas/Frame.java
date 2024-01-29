@@ -1,28 +1,39 @@
 package edu.gorilas;
 
 public class Frame {
-    private int pin1;
-    private int pin2;
+    private char pin1;
+    private char pin2;
     static int score = 0;
     
     public Frame() {
     }
 
-    // Pin 2 va vacio sin pin 1 es X
-    public Frame(int pin1,int bonus1, int bonus2) {
-        this.pin1 = pin1;
-        this.score += pin1 + bonus1 + bonus2;
-    }
-
-
-    public Frame(int pin1, int pin2) {
-        this.pin1 = pin1;
-        this.pin2 = pin2;
-        this.score += pin1 + pin2;
+    public Frame(char pin1, char pin2) {
+        this.pin1 = CheckZero(pin1);
+        this.pin2 = CheckZero(pin2);
+        this.score += charToInt(pin1, 0) + charToInt(pin2, charToInt(pin1, 0));
     }
 
     public int getScore() {
         return score;
+    }
+    
+    public static void setScore(int score) {
+        Frame.score = score;
+    }
+
+    private int charToInt(char pin, int pin2) {
+        if (pin == 'X')
+            return 10;
+        if (pin == '-')
+            return 0;
+        if (pin == '/')
+            return 10 - pin2;
+        return pin - '0';
+    }
+
+    private char CheckZero(char pin) {
+        return (pin == '0') ? '-' : pin;
     }
 
 }
