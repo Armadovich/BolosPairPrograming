@@ -18,7 +18,7 @@ public class Frame {
     public Frame(char pin1, char pin2, char pinExtra) {
         this.pin1 = CheckZero(pin1);
         this.pin2 = CheckZero(pin2);
-        this.pin2 = CheckZero(pinExtra);
+        this.pinExtra = CheckZero(pinExtra);
         this.score += charToInt(pin1, 0) + charToInt(pin2, charToInt(pin1, 0) + charToInt(pinExtra, 0) );
     }
 
