@@ -45,4 +45,11 @@ public class ScoreCardTest {
         int totalScore = scoreCard.calculateScore(score);
         assertEquals(150, totalScore);
     }
+
+    @Test
+    public void Random_1_Test() {
+        String score = "XXX454/9/1-XX5/X";
+        int totalScore = scoreCard.calculateScore(score);
+        assertEquals(178, totalScore);
+    }
 }
